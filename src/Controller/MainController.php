@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 
 class MainController extends AbstractController
@@ -15,5 +16,13 @@ class MainController extends AbstractController
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
         ]);
+    }
+
+    #[Route('/language', name: 'change_language')]
+    public function changeLanguage(Request $request): Response
+    {
+        $language = $request->get('language');
+        $request->getSession()->set('_locale', $language);
+        return $this->redirectToRoute('app_main');
     }
 }
