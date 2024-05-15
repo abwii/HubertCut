@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block head %}
-    {{ parent() }}
-    <title>Bienvenue</title>
-{% endblock %}
-
 {% block content %}
-    <p>Pour les particuliers :</p>
-    <button id="btn">Réserver une séance</button>
-    <p>Pour les professionnels :</p>
-    <button id="btn">Je suis coiffeur</button>    
+    <div class="row">
+        <div class="col selectBtn">
+            <button class="btn btn-light">Réserver une coiffure</button>
+        </div>
+        <div class="col selectBtn">
+            <button class="btn btn-light">Je suis coiffeur</button>
+        </div>
+    </div>
+    
+    <div style="height:500px;width:500px">
+        <div id="map"></div>
+    </div>
+    
 {% endblock %}

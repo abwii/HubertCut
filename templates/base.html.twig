@@ -6,35 +6,85 @@
 {% block head %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/">Uber Cut</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
+        <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Langue</a>
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Langue
+                    </a>
+                    <div class="dropdown-menu" style="min-width:0rem" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">🇬🇧</a>
+                        <a class="dropdown-item" href="#">🇲🇫</a>
+                    </div>
+                </div>
             </li>
+            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
             <li class="nav-item">
                 <a class="nav-link" href="register">Inscription</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="login">Connexion</a>
             </li>
+            {% endif %}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <li class="nav-item">
+                <a class="nav-link" href="login">{{ app.user.firstName }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="logout"><i class="fa-solid fa-right-from-bracket" style="margin-top:3px"></i></a>
+                
+            </li>
+            {% endif %}
+        </ul>
         </ul>
     </div>
 </nav>
 {% endblock %}
-
-{% block content %}
-{% endblock %}
+    
+{% block content %}{% endblock %}
 
 {% block scripts %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/796e94a7eb.js" crossorigin="anonymous"></script>
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
     <script src="{{ asset('js/script.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+{% endblock %}
+
+{% block footer %}
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Uber Cut</h4>
+                    <p>Uber Cut est une plateforme de mise en relation entre coiffeurs et clients.</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>Liens</h4>
+                    <ul>
+                        {# <li><a href="/">Accueil</a></li>
+                        <li><a href="register">Inscription</a></li>
+                        <li><a href="login">Connexion</a></li> #}
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>Contact</h4>
+                    <p>Wassim BACHA</p>
+                    <p>wassimbacha.pro@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 {% endblock %}
