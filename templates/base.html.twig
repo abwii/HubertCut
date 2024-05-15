@@ -16,12 +16,17 @@
                 <div class="dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Langue
+                        {# <p style='color:red;'>{{ app.request.locale }}</p> #}
                     </a>
                     <div class="dropdown-menu" style="min-width:0rem" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">🇬🇧</a>
-                        <a class="dropdown-item" href="#">🇲🇫</a>
+                        <a class="dropdown-item" href="language">🇬🇧</a>
+                        <a class="dropdown-item" href="language">🇲🇫</a>
                     </div>
                 </div>
+            </li>
+            <li class="nav-item">
+                <h1 style='color:red;'>{{ 'welcome.message'|trans }}</h1>
+                <p style='color:red;'>{{ app.request.locale }}</p>
             </li>
             {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
             <li class="nav-item">
@@ -73,10 +78,10 @@
                 </div>
                 <div class="col-md-4">
                     <h4>Liens</h4>
-                    <ul>
-                        {# <li><a href="/">Accueil</a></li>
-                        <li><a href="register">Inscription</a></li>
-                        <li><a href="login">Connexion</a></li> #}
+                    <ul class="navbar-nav ml-auto">
+                        <li><a href="https://github.com/abwii"><i class="fa-brands fa-github" style="color:white;"></i></a></li>
+                        <li><a href="https://www.instagram.com/abwi_irl/"><i class="fa-brands fa-instagram" style="color:white;"></i></a></li>
+                        <li><a href="https://www.discord.com/users/244923422696669187"><i class="fa-brands fa-discord" style="color:white;"></i></i></a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
