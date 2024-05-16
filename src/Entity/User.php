@@ -8,7 +8,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -30,6 +29,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 20)]
     private ?string $phoneNumber = null;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $cutterDescription = null;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $cutterRank = null;
 
     #[ORM\Column(nullable: true)]
     private ?string $profilePicture = null;
@@ -95,6 +100,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhoneNumber(string $phoneNumber): static
     {
         $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    public function getCutterDescription(): ?string
+    {
+        return $this->cutterDescription;
+    }
+
+    public function setCutterDescription(?string $cutterDescription): static
+    {
+        $this->cutterDescription = $cutterDescription;
+
+        return $this;
+    }
+
+    public function getCutterRank(): ?float
+    {
+        return $this->cutterRank;
+    }
+
+    public function setCutterRank(?float $cutterRank): static
+    {
+        $this->cutterRank = $cutterRank;
 
         return $this;
     }
