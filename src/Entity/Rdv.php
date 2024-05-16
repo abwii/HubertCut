@@ -20,6 +20,12 @@ class Rdv
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $rdvStatus = null;
 
+    #[ORM\Column(type: Types::FLOAT, nullable: true)]
+    private ?float $rdvCoordinatesX = null;
+
+    #[ORM\Column(type: Types::FLOAT, nullable: true)]
+    private ?float $rdvCoordinatesY = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +51,30 @@ class Rdv
     public function setRdvStatus(?string $rdvStatus): static
     {
         $this->rdvStatus = $rdvStatus;
+
+        return $this;
+    }
+
+    public function getRdvCoordinatesX(): ?float
+    {
+        return $this->rdvCoordinatesX;
+    }
+
+    public function setRdvCoordinatesX(?float $rdvCoordinatesX): static
+    {
+        $this->rdvCoordinatesX = $rdvCoordinatesX;
+
+        return $this;
+    }
+
+    public function getRdvCoordinatesY(): ?float
+    {
+        return $this->rdvCoordinatesY;
+    }
+
+    public function setRdvCoordinatesY(?float $rdvCoordinatesY): static
+    {
+        $this->rdvCoordinatesY = $rdvCoordinatesY;
 
         return $this;
     }
