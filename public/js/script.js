@@ -1,4 +1,4 @@
-console.log('Hello adazdazd script.js');
+console.log('Hello adazjdazdazd script.js');
 
 var map = L.map('map').setView([49.43693086050762, 1.102400429307783], 15);
 
