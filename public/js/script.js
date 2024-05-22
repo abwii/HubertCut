@@ -19,3 +19,4 @@ var map = L.map('map').setView([49.43693086050762, 1.102400429307783], 15);
         marker.bindPopup('Hospital').openPopup();
     });
 
+    setTimeout(function(){map.invalidateSize(true);},100);
