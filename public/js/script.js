@@ -1,4 +1,7 @@
-console.log('Hello adazjdazdazd script.js');
+// Is this thing on?
+console.log('Hello script.js');
+
+// Leaflet map
 
 var map = L.map('map').setView([49.43693086050762, 1.102400429307783], 15);
 
@@ -15,3 +18,4 @@ var map = L.map('map').setView([49.43693086050762, 1.102400429307783], 15);
     marker.on('click', function() {
         marker.bindPopup('Hospital').openPopup();
     });
+

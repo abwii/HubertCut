@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <h1>Hair style selection</h1>
+
+    {{ form_errors(RdvForm) }}
+
+    {{ form_start(RdvForm, {'attr': {'id': 'rdv-form'}}) }}
+
+        {{ form_row(RdvForm.field_name1) }}
+        {{ form_row(RdvForm.field_name2) }}
+        {{ form_row(RdvForm.field_name3) }}
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    {{ form_end(RdvForm) }}
+
+    <div id="result">adazd</div>
+
+    <div id="map"></div>
+
+
+    <script src="{{ asset('js/customerScript.js') }}"></script>
+
+{% endblock %}
