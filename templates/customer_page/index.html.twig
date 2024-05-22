@@ -4,22 +4,36 @@
 
     <h1>Hair style selection</h1>
 
-    {{ form_errors(RdvForm) }}
+    <div class="box">
+        <div class="row">
+            <div class="cell">
 
-    {{ form_start(RdvForm, {'attr': {'id': 'rdv-form'}}) }}
+            {{ form_errors(RdvForm) }}
 
-        {{ form_row(RdvForm.field_name1) }}
-        {{ form_row(RdvForm.field_name2) }}
-        {{ form_row(RdvForm.field_name3) }}
+            {{ form_start(RdvForm, {'attr': {'id': 'rdv-form'}}) }}
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+                {{ form_row(RdvForm.field_name1) }}
+                {{ form_row(RdvForm.field_name2) }}
+                {{ form_row(RdvForm.field_name3) }}
 
-    {{ form_end(RdvForm) }}
+                <button type="submit" class="btn btn-primary">Submit</button>
 
-    <div id="result">adazd</div>
+            {{ form_end(RdvForm) }}
 
-    <div id="map"></div>
+            </div>
+            <div class="cell">
 
+                
+                <div class="center">
+                    <div id="result"></div>
+                    <div id="map"></div>
+                </div>
+
+                
+
+            </div>
+        </div>
+    </div>
 
     <script src="{{ asset('js/customerScript.js') }}"></script>
 
