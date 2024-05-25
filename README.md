@@ -1,11 +1,12 @@
-# Nom du Projet
+# Uber Cut
 
 [![Symfony](https://img.shields.io/badge/Symfony-5.x-blue)](https://symfony.com/)
 [![PHP](https://img.shields.io/badge/PHP-7.x-blue)](https://www.php.net/)
 
-Description brève du projet.
+Uber Cut (ou Hubert Cut) est une application web permettant de mettre en relation les clients et les coiffeurs dans une zone géographique.<br>
+Son fonctionnement est similaire à celui de Uber Eats.
 
-## Prérequis
+## Prérequis de développement
 
 - PHP 7.x
 - Composer
@@ -13,7 +14,7 @@ Description brève du projet.
 
 ## Installation
 
-1. Clonez ce dépôt : `git clone https://github.com/votre-utilisateur/votre-projet.git`
+1. Clonez ce dépôt : `git clone https://github.com/abwii/HubertCut`
 2. Accédez au répertoire du projet : `cd votre-projet`
 3. Installez les dépendances : `composer install`
 4. Configurez la base de données dans le fichier `.env`
@@ -21,21 +22,6 @@ Description brève du projet.
 6. Effectuez les migrations : `php bin/console doctrine:migrations:migrate`
 7. Lancez le serveur de développement : `symfony serve`
 
-## Utilisation
+## Conclusion
 
-Expliquez comment utiliser votre application ou bibliothèque. Fournissez des exemples de code si nécessaire.
-
-## Contribuer
-
-Toute contribution est la bienvenue! Suivez ces étapes pour contribuer :
-
-1. Fork ce dépôt
-2. Créez une branche pour votre fonctionnalité : `git checkout -b ma-nouvelle-fonctionnalite`
-3. Faites vos modifications
-4. Committez vos changements : `git commit -m "Ajout de ma nouvelle fonctionnalité"`
-5. Poussez vos modifications vers votre fork : `git push origin ma-nouvelle-fonctionnalite`
-6. Ouvrez une Pull Request
-
-## Licence
-
-Indiquez la licence de votre projet.
+Il s'agit d'un projet de fin d'études pour mon diplôme de Bachelor 3 en Développement Web & Application à l'école EFREI Paris.
