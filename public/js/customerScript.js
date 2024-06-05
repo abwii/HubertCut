@@ -1,7 +1,6 @@
 // This thing on?
 console.log('Hello customerScript.js');
 
-// Print the form data in the console
 $(document).ready(function() {
     $('#RdvForm').submit(function(event) {
         console.log('Form submitted.');

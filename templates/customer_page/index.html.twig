@@ -1,40 +1,55 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
+    <div class="customer-container">
+        <div class="box">
+            <div class="row">
+                <div class="cell">
+                    <div class="form-container">
+                        {{ form_errors(RdvForm) }}
 
-    <h1>Hair style selection</h1>
+                        {{ form_start(RdvForm, {'attr': {'id': 'rdv-form', 'class': 'form-horizontal'}}) }}
 
-    <div class="box">
-        <div class="row">
-            <div class="cell">
+                        <div class="form-group">
+                            {{ form_label(RdvForm.Sexe) }}
+                            {{ form_widget(RdvForm.Sexe, {'attr': {'class': 'form-control'}}) }}
+                        </div>
 
-            {{ form_errors(RdvForm) }}
+                        <div class="form-group">
+                            {{ form_label(RdvForm.Longueur) }}
+                            {{ form_widget(RdvForm.Longueur, {'attr': {'class': 'form-control'}}) }}
+                        </div>
 
-            {{ form_start(RdvForm, {'attr': {'id': 'rdv-form'}}) }}
+                        <div class="form-group">
+                            {{ form_label(RdvForm.Coupe) }}
+                            {{ form_widget(RdvForm.Coupe, {'attr': {'class': 'form-control'}}) }}
+                        </div>
 
-                {{ form_row(RdvForm.field_name1) }}
-                {{ form_row(RdvForm.field_name2) }}
-                {{ form_row(RdvForm.field_name3) }}
+                        <div class="form-group">
+                            {{ form_label(RdvForm.Extras) }}
+                            {{ form_widget(RdvForm.Extras, {'attr': {'class': 'form-control'}}) }}
+                        </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="form-group">
+                            {{ form_label(RdvForm.Commentaire) }}
+                            {{ form_widget(RdvForm.Commentaire, {'attr': {'class': 'form-control'}}) }}
+                        </div>
 
-            {{ form_end(RdvForm) }}
+                        <button type="submit" class="btn btn-primary">Rechercher</button>
 
-            </div>
-            <div class="cell">
-
-                
-                <div class="center">
-                    <div id="result"></div>
-                    <div id="map"></div>
+                        {{ form_end(RdvForm) }}
+                    </div>
                 </div>
 
-                
-
+                <div class="cell">
+                    <div class="center">
+                        <div id="result"></div>
+                        <div id="map"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="{{ asset('js/customerScript.js') }}"></script>
-
 {% endblock %}
