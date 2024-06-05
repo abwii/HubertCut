@@ -32,6 +32,8 @@ class CutCrudController extends AbstractCrudController
             IdField::new('id')
                 ->hideOnForm(),
             TextField::new('cutName'),
+            TextField::new('cutSex'),
+            TextField::new('cutLength'),
             NumberField::new('cutPrice')->setNumDecimals(2),
             TextField::new('cutDescription'),
         ];

@@ -36,9 +36,11 @@ class UserCrudController extends AbstractCrudController
             TextField::new('lastName'),
             TextField::new('email'),
             TextField::new('phoneNumber'),
+            NumberField::new('cutterCutsDone'),
             ArrayField::new('roles'),
             TextEditorField::new('cutterDescription'),
             NumberField::new('cutterRank'),
+            TextField::new('profilePicture'),
         ];
     }
     

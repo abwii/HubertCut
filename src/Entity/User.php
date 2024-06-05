@@ -39,6 +39,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?string $profilePicture = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $cutterStatus = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $cutterCutsDone = null;
+
     /**
      * @var list<string> The user roles
      */
@@ -136,6 +142,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setProfilePicture(?string $profilePicture): static
     {
         $this->profilePicture = $profilePicture;
+
+        return $this;
+    }
+
+    public function getCutterStatus(): ?string
+    {
+        return $this->cutterStatus;
+    }
+
+    public function setCutterStatus(?string $cutterStatus): static
+    {
+        $this->cutterStatus = $cutterStatus;
+
+        return $this;
+    }
+
+    public function getCutterCutsDone(): ?int
+    {
+        return $this->cutterCutsDone;
+    }
+
+    public function setCutterCutsDone(?int $cutterCutsDone): static
+    {
+        $this->cutterCutsDone = $cutterCutsDone;
 
         return $this;
     }

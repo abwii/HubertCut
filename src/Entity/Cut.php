@@ -23,6 +23,12 @@ class Cut
     #[ORM\Column(type: Types::TEXT)]
     private ?string $cutDescription = null;
 
+    #[ORM\Column(length: 10)]
+    private ?string $cutSex = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $cutLength = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +66,30 @@ class Cut
     public function setCutDescription(string $cutDescription): static
     {
         $this->cutDescription = $cutDescription;
+
+        return $this;
+    }
+
+    public function getCutSex(): ?string
+    {
+        return $this->cutSex;
+    }
+
+    public function setCutSex(string $cutSex): static
+    {
+        $this->cutSex = $cutSex;
+
+        return $this;
+    }
+
+    public function getCutLength(): ?string
+    {
+        return $this->cutLength;
+    }
+
+    public function setCutLength(string $cutLength): static
+    {
+        $this->cutLength = $cutLength;
 
         return $this;
     }
