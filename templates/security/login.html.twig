@@ -31,11 +31,6 @@
 
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                            <div class="form-group form-check">
-                                <input type="checkbox" name="_remember_me" class="form-check-input" id="rememberMe">
-                                <label class="form-check-label" for="rememberMe">Se souvenir de moi</label>
-                            </div>
-
                             <div class="text-center">
                                 <a href="{{ path('app_register') }}" class="btn btn-link">Vous n'avez pas de compte ?</a>
                                 <button class="btn btn-primary btn-block" type="submit">Se connecter</button>
