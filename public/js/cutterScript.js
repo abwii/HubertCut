@@ -1,5 +1,19 @@
-// This thing on?
+// cutterScript.js
+
 console.log('Hello cutterScript.js');
+
+document.addEventListener('DOMContentLoaded', function() {
+    var searchBtn = document.getElementById('search-btn');
+    var spinner = document.getElementById('spinner-loading');
+    
+    if (cutterStatus === 'LFC') {
+        searchBtn.textContent = 'En recherche...';
+        spinner.classList.remove('hidden');
+    } else {
+        searchBtn.textContent = 'Rechercher un client';
+        spinner.classList.add('hidden');
+    }
+});
 
 function search() {
     console.log('search() called');
@@ -7,11 +21,27 @@ function search() {
     var spinner = document.getElementById('spinner-loading');
     var searchBtn = document.getElementById('search-btn');
 
-    if (spinner.classList.contains('hidden')) {
-        spinner.classList.remove('hidden');
-        searchBtn.textContent = 'En recherche...';
-    } else {
-        spinner.classList.add('hidden');
-        searchBtn.textContent = 'Rechercher un client';
-    }
+    updateCutterStatus(function(newStatus) {
+        if (newStatus === 'LFC') {
+            searchBtn.textContent = 'En recherche...';
+            spinner.classList.remove('hidden');
+        } else {
+            searchBtn.textContent = 'Rechercher un client';
+            spinner.classList.add('hidden');
+        }
+    });
+}
+
+function updateCutterStatus(callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/update-cutter-status', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log('Cutter status updated');
+            var newStatus = xhr.responseText.split(' ').pop(); // Extracts the new status from the response
+            callback(newStatus);
+        }
+    };
+    xhr.send();
 }
