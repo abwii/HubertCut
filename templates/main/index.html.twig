@@ -2,11 +2,15 @@
 
 {% block content %}
     <div class="row">
+        {% if is_granted('ROLE_USER') %}
         <div class="col selectBtn">
             <button class="btn btn-light" onclick="window.location.href='/customer'">Réserver une coiffure</button>
         </div>
+        {% endif %}
+        {% if is_granted('ROLE_CUTTER') %}
         <div class="col selectBtn">
             <button class="btn btn-light" onclick="window.location.href='/cutter'">Je suis coiffeur</button>
         </div>
+        {% endif %}
     </div>
 {% endblock %}
