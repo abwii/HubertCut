@@ -12,6 +12,10 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormError;
 
 class RegistrationFormType extends AbstractType
 {
@@ -42,8 +46,6 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
@@ -51,14 +53,34 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Please enter a password',
                     ]),
                     new Length([
-                        'min' => 6,
+                        'min' => 12,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
                         'max' => 4096,
+                    ]),
+                    new Regex([
+                        'pattern' => '/^(?=.*[!@#$%^&*-])(?=.*[A-Z])(?=.*[0-9]).{12,}$/',
+                        'message' => 'Your password should contain at least one special character, one uppercase letter, and one number.',
                     ]),
                 ],
             ])
-        ;
+            ->add('confirmPassword', PasswordType::class, [
+                'mapped' => false,
+                'attr' => ['autocomplete' => 'new-password'],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please confirm your password',
+                    ]),
+                ],
+            ])
+            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+                $form = $event->getForm();
+                $plainPassword = $form->get('plainPassword')->getData();
+                $confirmPassword = $form->get('confirmPassword')->getData();
+
+                if ($plainPassword !== $confirmPassword) {
+                    $form->get('confirmPassword')->addError(new FormError('The password fields must match.'));
+                }
+            });
     }
 
     public function configureOptions(OptionsResolver $resolver): void
