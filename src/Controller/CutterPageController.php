@@ -1,5 +1,7 @@
 <?php
 
+// CutterPageController.php
+
 namespace App\Controller;
 
 use App\Entity\User;
@@ -20,6 +22,7 @@ class CutterPageController extends AbstractController
         return $this->render('cutter_page/index.html.twig', [
             'controller_name' => 'CutterPageController',
             'user' => $user,
+            'cutter_status' => $user->getCutterStatus(),
         ]);
     }
 
@@ -35,6 +38,16 @@ class CutterPageController extends AbstractController
 
         return $this->redirectToRoute('app_cutter_page');
     }
+
+    #[Route('/update-cutter-status', name: 'update_cutter_status', methods: ['POST'])]
+    public function updateCutterStatus(EntityManagerInterface $em, UserInterface $user): Response
+    {
+        $currentStatus = $user->getCutterStatus();
+        $newStatus = $currentStatus === 'LFC' ? 'IDLE' : 'LFC';
+        $user->setCutterStatus($newStatus);
+        $em->persist($user);
+        $em->flush();
+
+        return new Response('Status updated to ' . $newStatus);
+    }
 }
-
-

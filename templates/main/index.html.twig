@@ -12,5 +12,41 @@
             <button class="btn btn-light" onclick="window.location.href='/cutter'">Je suis coiffeur</button>
         </div>
         {% endif %}
+        {% if not is_granted('ROLE_CUTTER') and not is_granted('ROLE_USER') %}
+            <div class="col selectBtn" style="flex-direction:column">
+            <h1>Bienvenue sur Uber Cut</h1>
+            <p>Le premier site de réservation de coupe à domicile.</p>
+            <p>Connectez-vous ou inscrivez-vous pour accéder à nos services.</p>
+            <br>
+            <button class="btn btn-light" onclick="window.location.href='/login'">Connectez-vous</button>
+            </div>
+        {% endif %}
     </div>
+{% endblock %}
+
+{% block footer %}
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Uber Cut</h4>
+                    <p>Uber Cut est une plateforme de mise en relation entre coiffeurs et clients.</p>
+                    <a onclick="window.location.href='/privacypolicy'" style="cursor: pointer;"><u>Politique de confidentialité</u></a>
+                </div>
+                <div class="col-md-4">
+                    <h4>Liens</h4>
+                    <ul class="navbar-nav ml-auto">
+                        <li><a href="https://github.com/abwii"><i class="fa-brands fa-github" style="color:white;"></i></a></li>
+                        <li><a href="https://www.instagram.com/abwi_irl/"><i class="fa-brands fa-instagram" style="color:white;"></i></a></li>
+                        <li><a href="https://www.discord.com/users/244923422696669187"><i class="fa-brands fa-discord" style="color:white;"></i></i></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>Contact</h4>
+                    <p>wassimbacha.pro@gmail.com</p>
+                    <p>2024 Uber Cut. Tous droits réservés.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 {% endblock %}

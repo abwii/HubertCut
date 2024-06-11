@@ -1,26 +1,58 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    {% block body %}
-        <h1>Register</h1>
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="card shadow-lg" style="margin-top:20px">
+                    <div class="card-body p-4">
+                        <h1 class="h3 mb-3 font-weight-normal text-center">Inscription</h1>
+                        
+                        {{ form_errors(registrationForm) }}
 
-        {{ form_errors(registrationForm) }}
-
-        {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.firstName) }}
-            {{ form_row(registrationForm.lastName) }}
-            {{ form_row(registrationForm.phoneNumber) }}
-            {{ form_row(registrationForm.plainPassword, {
-                label: 'Password'
-            }) }}
-            {{ form_row(registrationForm.confirmPassword, {
-                label: 'Confirm Password'
-            }) }}
-            {{ form_row(registrationForm.agreeTerms) }}
-            <a href="{{ path('app_login') }}">Already have an account?</a>
-            <br>
-            <button type="submit" class="btn btn-primary">Register</button>
-        {{ form_end(registrationForm) }}
-    {% endblock %}
+                        {{ form_start(registrationForm) }}
+                            <div class="form-group">
+                                {{ form_row(registrationForm.email, {'attr': {'class': 'form-control'}, 'label': 'Email'}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(registrationForm.firstName, {'attr': {'class': 'form-control'}, 'label': 'Prénom'}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(registrationForm.lastName, {'attr': {'class': 'form-control'}, 'label': 'Nom'}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(registrationForm.phoneNumber, {'attr': {'class': 'form-control'}, 'label': 'Numéro de téléphone'}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(registrationForm.plainPassword, {
+                                    'label': 'Mot de passe', 'attr': {'class': 'form-control'}
+                                }) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(registrationForm.confirmPassword, {
+                                    'label': 'Confirmez le mot de passe', 'attr': {'class': 'form-control'}
+                                }) }}
+                            </div>
+                            <div class="form-group form-check">
+                                <a href="{{ path('app_login') }}" class="btn btn-link">Conditions générales d'utilisation</a>
+                                {{ form_row(registrationForm.agreeTerms, {'label': 'Accepter les conditions'}) }}
+                            </div>
+                            <div class="text-center mb-3">
+                                <a href="{{ path('app_login') }}" class="btn btn-link">Vous avez déjà un compte ?</a>
+                            </div>
+                            <div class="text-center mb-3">
+                                <button type="submit" class="btn btn-primary btn-block">Inscription</button>
+                            </div>
+                            <div class="form-group">
+                                <label for="roles"></label>
+                                <div id="roles">
+                                    {{ form_row(registrationForm.roles) }}
+                                </div>
+                            </div>
+                        {{ form_end(registrationForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

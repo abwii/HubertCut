@@ -30,10 +30,7 @@ class RdvFormType extends AbstractType
             ])
             ->add('Coupe', ChoiceType::class,[
                 'choices' => [
-                    'Buzzcut' => 'buzzcut',
-                    'Mulet' => 'mulet',
-                    'Crête' => 'crête',
-                    'Ronaldo' => 'ronaldo',
+                    
                 ],
             ])
             ->add('Extras', ChoiceType::class,[
@@ -42,6 +39,12 @@ class RdvFormType extends AbstractType
                     'Shampoing (+10€)' => 'shampoing',
                     'Brushing (+20€)' => 'brushing',
                     'Teinture (+30€)' => 'teinture',
+                ],
+            ])
+            ->add('Adresse', ChoiceType::class,[
+                'choices' => [
+                    'A domicile' => 'a_domicile',
+                    'Sur place' => 'sur place',
                 ],
             ])
             ->add('Commentaire', TextType::class)
