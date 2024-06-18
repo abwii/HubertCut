@@ -45,6 +45,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $cutterCutsDone = null;
 
+    #[ORM\Column(type: 'json', nullable: true)]
+    private ?array $cutterCuts = null;
+
     /**
      * @var list<string> The user roles
      */
@@ -166,6 +169,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCutterCutsDone(?int $cutterCutsDone): static
     {
         $this->cutterCutsDone = $cutterCutsDone;
+
+        return $this;
+    }
+
+    public function getCutterCuts(): ?array
+    {
+        return $this->cutterCuts;
+    }
+
+    public function setCutterCuts(?array $cutterCuts): static
+    {
+        $this->cutterCuts = $cutterCuts;
 
         return $this;
     }
