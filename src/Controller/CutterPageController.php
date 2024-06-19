@@ -1,7 +1,5 @@
 <?php
 
-// CutterPageController.php
-
 namespace App\Controller;
 
 use App\Entity\User;
