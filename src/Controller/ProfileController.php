@@ -5,11 +5,12 @@ namespace App\Controller;
 use App\Form\ChangeNameFormType;
 use App\Form\ChangePhoneFormType;
 use App\Form\ChangeEmailFormType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ProfileController extends AbstractController
 {
@@ -46,5 +47,18 @@ class ProfileController extends AbstractController
             'phoneForm' => $phoneForm->createView(),
             'emailForm' => $emailForm->createView(),
         ]);
+    }
+
+    #[Route('/delete-account', name: 'delete_account', methods: ['POST'])]
+    public function deleteAccount(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage): Response
+    {
+        $user = $this->getUser();
+
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        $tokenStorage->setToken(null);
+
+        return $this->redirectToRoute('app_main');
     }
 }
