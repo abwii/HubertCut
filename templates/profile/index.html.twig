@@ -28,16 +28,34 @@
                     <ul class="list-group bg-grey">
                         <li class="list-group-item d-flex justify-content-between align-items-center bg-grey">
                             <span style="color:black;">{{ app.user.firstName }} {{ app.user.lastName }}</span>
-                            <button class="btn btn-link">Modifier</button>
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#changeNameForm">Modifier</button>
                         </li>
+                        <div id="changeNameForm" class="collapse">
+                            {{ form_start(nameForm) }}
+                                {{ form_widget(nameForm) }}
+                                <button class="btn btn-primary mt-3">Enregistrer</button>
+                            {{ form_end(nameForm) }}
+                        </div>
                         <li class="list-group-item d-flex justify-content-between align-items-center bg-grey">
                             <span style="color:black;">{{ app.user.phoneNumber }}</span>
-                            <button class="btn btn-link">Modifier</button>
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#changePhoneForm">Modifier</button>
                         </li>
+                        <div id="changePhoneForm" class="collapse">
+                            {{ form_start(phoneForm) }}
+                                {{ form_widget(phoneForm) }}
+                                <button class="btn btn-primary mt-3">Enregistrer</button>
+                            {{ form_end(phoneForm) }}
+                        </div>
                         <li class="list-group-item d-flex justify-content-between align-items-center bg-grey">
                             <span style="color:black;">{{ app.user.email }}</span>
-                            <button class="btn btn-link">Modifier</button>
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#changeEmailForm">Modifier</button>
                         </li>
+                        <div id="changeEmailForm" class="collapse">
+                            {{ form_start(emailForm) }}
+                                {{ form_widget(emailForm) }}
+                                <button class="btn btn-primary mt-3">Enregistrer</button>
+                            {{ form_end(emailForm) }}
+                        </div>
                     </ul>
                 </div>
             </div>
