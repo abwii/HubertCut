@@ -4,7 +4,7 @@
     <div class="box">
         <div class="row">
             <div class="cell">
-                <div class="container d-flex justify-content-center mt-5" style="flex-direction: column; align-items: center;">
+                <div class="container d-flex justify-content-center" style="flex-direction: column; align-items: center; margin-top:200px">
                     <div class="card mb-3">
                         <div class="top-container">
                             {% if app.user.profilepicture %}
@@ -20,7 +20,7 @@
                         </div>
                         <div class="middle-container d-flex justify-content-between align-items-center mt-3 p-2">
                             <div class="dollar-div px-3">
-                                <div class="round-div">{{ app.user.cuttercutsdone }}</div>
+                                <div class="round-div">{{ app.user.cutterCutsDone }}</div>
                             </div>
                             <div class="d-flex flex-column text-right mr-2">
                                 <span class="current-balance">Rang</span>
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card mb-3">
                         <div class="top-container">
                             <div class="ml-3 form-container">
                                 <form method="post" action="{{ path('update_cutter_description') }}">
@@ -38,9 +38,26 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card mb-3">
+                        <div class="top-container">
+                            <div class="ml-3 form-container">
+                                <form method="post" action="{{ path('update_cutter_cuts') }}">
+                                    <h5>Sélectionner les coupes :</h5>
+                                    <ul class="list-group">
+                                        {% for cut in cuts %}
+                                            <li class="list-group-item">
+                                                <input type="checkbox" name="cuts[]" value="{{ cut.id }}" {% if cut in app.user.cutterCuts %}checked{% endif %}>
+                                                {{ cut.cutName }}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
             <div class="cell">
                 <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100%;">
                     <button id="search-btn" class="btn btn-primary my-3" onclick="search()">Rechercher un client</button>
