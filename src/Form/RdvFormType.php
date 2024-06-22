@@ -19,19 +19,18 @@ class RdvFormType extends AbstractType
                     'Femme' => 'femme',
                     'Mixte' => 'mixte',
                 ],
+                'attr' => ['disabled' => 'disabled'], // Rendre le champ grisé et inutilisable
             ])
             ->add('Longueur', ChoiceType::class,[
                 'choices' => [
-                    // $this->getCutLengthChoices(),
                     'Court' => 'court',
                     'Mi-long' => 'mi-long',
                     'Long' => 'long',
                 ],
+                'attr' => ['disabled' => 'disabled'], // Rendre le champ grisé et inutilisable
             ])
             ->add('Coupe', ChoiceType::class,[
-                'choices' => [
-                    
-                ],
+                'choices' => $options['cut_choices'],
             ])
             ->add('Extras', ChoiceType::class,[
                 'choices' => [
@@ -44,7 +43,7 @@ class RdvFormType extends AbstractType
             ->add('Adresse', ChoiceType::class,[
                 'choices' => [
                     'A domicile' => 'a_domicile',
-                    'Sur place' => 'sur place',
+                    'Sur place' => 'sur_place',
                 ],
             ])
             ->add('Commentaire', TextType::class)
@@ -54,7 +53,7 @@ class RdvFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'cut_choices' => [], // Par défaut, on passe un tableau vide pour éviter les erreurs
         ]);
     }
 }
