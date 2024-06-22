@@ -26,6 +26,12 @@ class Rdv
     #[ORM\Column(type: Types::FLOAT, nullable: true)]
     private ?float $rdvCoordinatesY = null;
 
+    #[ORM\Column]
+    private ?int $rdvClientId = null;
+
+    #[ORM\Column]
+    private ?int $rdvCutterId = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +81,30 @@ class Rdv
     public function setRdvCoordinatesY(?float $rdvCoordinatesY): static
     {
         $this->rdvCoordinatesY = $rdvCoordinatesY;
+
+        return $this;
+    }
+
+    public function getRdvClientId(): ?int
+    {
+        return $this->rdvClientId;
+    }
+
+    public function setRdvClientId(?int $rdvClientId): static
+    {
+        $this->rdvClientId = $rdvClientId;
+
+        return $this;
+    }
+
+    public function getRdvCutterId(): ?int
+    {
+        return $this->rdvCutterId;
+    }
+
+    public function setRdvCutterId(?int $rdvCutterId): static
+    {
+        $this->rdvCutterId = $rdvCutterId;
 
         return $this;
     }
