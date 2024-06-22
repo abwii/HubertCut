@@ -49,6 +49,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Cut::class)]
     private Collection $cutterCuts;
 
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $userCoordinatesX = null;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $userCoordinatesY = null;
+
     #[ORM\Column(type: 'json')]
     private array $roles = [];
 
@@ -193,6 +199,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeCutterCut(Cut $cut): static
     {
         $this->cutterCuts->removeElement($cut);
+
+        return $this;
+    }
+
+    public function getUserCoordinatesX(): ?float
+    {
+        return $this->userCoordinatesX;
+    }
+
+    public function setUserCoordinatesX(?float $userCoordinatesX): static
+    {
+        $this->userCoordinatesX = $userCoordinatesX;
+
+        return $this;
+    }
+
+    public function getUserCoordinatesY(): ?float
+    {
+        return $this->userCoordinatesY;
+    }
+
+    public function setUserCoordinatesY(?float $userCoordinatesY): static
+    {
+        $this->userCoordinatesY = $userCoordinatesY;
 
         return $this;
     }

@@ -58,5 +58,11 @@
         </div>
     </div>
 
+    <script>
+        var userCoordinatesX = {{ userCoordinatesX|json_encode }};
+        var userCoordinatesY = {{ userCoordinatesY|json_encode }};
+        console.log('User Coordinates:', userCoordinatesX, userCoordinatesY);
+    </script>
+
     <script src="{{ asset('js/customerScript.js') }}"></script>
 {% endblock %}

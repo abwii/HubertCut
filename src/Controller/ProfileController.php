@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\ChangeNameFormType;
 use App\Form\ChangePhoneFormType;
 use App\Form\ChangeEmailFormType;
+use App\Form\ChangeCoordinatesFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,10 +23,12 @@ class ProfileController extends AbstractController
         $nameForm = $this->createForm(ChangeNameFormType::class, $user);
         $phoneForm = $this->createForm(ChangePhoneFormType::class, $user);
         $emailForm = $this->createForm(ChangeEmailFormType::class, $user);
+        $coordinatesForm = $this->createForm(ChangeCoordinatesFormType::class, $user);
 
         $nameForm->handleRequest($request);
         $phoneForm->handleRequest($request);
         $emailForm->handleRequest($request);
+        $coordinatesForm->handleRequest($request);
 
         if ($nameForm->isSubmitted() && $nameForm->isValid()) {
             $entityManager->flush();
@@ -42,10 +45,16 @@ class ProfileController extends AbstractController
             return $this->redirectToRoute('app_profile');
         }
 
+        if ($coordinatesForm->isSubmitted() && $coordinatesForm->isValid()) {
+            $entityManager->flush();
+            return $this->redirectToRoute('app_profile');
+        }
+
         return $this->render('profile/index.html.twig', [
             'nameForm' => $nameForm->createView(),
             'phoneForm' => $phoneForm->createView(),
             'emailForm' => $emailForm->createView(),
+            'coordinatesForm' => $coordinatesForm->createView(),
         ]);
     }
 
