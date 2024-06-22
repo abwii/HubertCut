@@ -3,13 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -18,7 +19,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180)]
+    #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
@@ -45,20 +46,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $cutterCutsDone = null;
 
-    #[ORM\Column(type: 'json', nullable: true)]
-    private ?array $cutterCuts = null;
+    #[ORM\ManyToMany(targetEntity: Cut::class)]
+    private Collection $cutterCuts;
 
-    /**
-     * @var list<string> The user roles
-     */
-    #[ORM\Column]
+    #[ORM\Column(type: 'json')]
     private array $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
     #[ORM\Column]
     private ?string $password = null;
+
+    public function __construct()
+    {
+        $this->cutterCuts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -173,14 +173,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCutterCuts(): ?array
+    /**
+     * @return Collection<int, Cut>
+     */
+    public function getCutterCuts(): Collection
     {
         return $this->cutterCuts;
     }
 
-    public function setCutterCuts(?array $cutterCuts): static
+    public function addCutterCut(Cut $cut): static
     {
-        $this->cutterCuts = $cutterCuts;
+        if (!$this->cutterCuts->contains($cut)) {
+            $this->cutterCuts->add($cut);
+        }
+
+        return $this;
+    }
+
+    public function removeCutterCut(Cut $cut): static
+    {
+        $this->cutterCuts->removeElement($cut);
 
         return $this;
     }
@@ -197,20 +209,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @see UserInterface
-     *
-     * @return list<string>
      */
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
 
     /**
-     * @param list<string> $roles
+     * @param array<string> $roles
      */
     public function setRoles(array $roles): static
     {
@@ -239,7 +248,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        // Clear temporary, sensitive data here
     }
 }
