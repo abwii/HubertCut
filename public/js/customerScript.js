@@ -19,13 +19,10 @@ function initializeMap(latitude = 49.43693086050762, longitude = 1.1024004293077
     }).addTo(map);
 
     L.marker([49.43693086050762, 1.102400429307783]).addTo(map)
-        .bindPopup('Marine <br>⭐⭐⭐⭐⭐ (321 Prestations)<br><button type="button" class="btn btn-primary">Réserver une séance (16,95€)</button>');
+        .bindPopup('Marine <br>⭐⭐⭐⭐⭐ (321 Prestations)<br><button type="button" class="btn btn-primary" onclick="createRdv(1, 1, \'a_domicile\')">Réserver une séance (16,95€)</button>');
 
     L.marker([49.43693086053762, 1.132400229307783]).addTo(map)
-        .bindPopup('Camille <br>⭐⭐⭐ (36 Prestations)<br><button type="button" class="btn btn-primary">Réserver une séance (12,95€)</button>');
-
-    L.marker([49.43693036050762, 1.102400429307783]).addTo(map)
-        .bindPopup('Camille <br>⭐⭐⭐ (36 Prestations)<br><button type="button" class="btn btn-primary">Réserver une séance (12,95€)</button>');
+        .bindPopup('Camille <br>⭐⭐⭐ (36 Prestations)<br><button type="button" class="btn btn-primary" onclick="createRdv(2, 1, \'sur_place\')">Réserver une séance (12,95€)</button>');
 
     setTimeout(function(){ map.invalidateSize(true); }, 100);
 }
@@ -57,4 +54,28 @@ requestUserLocation();
 function updatemap() {
     console.log('Updating map with form data...');
     requestUserLocation();
+}
+
+function createRdv(cutterId, cutId, locationType) {
+    var formData = new FormData();
+    formData.append('cutter_id', cutterId);
+    formData.append('cut_id', cutId);
+    formData.append('location_type', locationType);
+
+    fetch('/create-rdv', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+        alert('Rendez-vous créé avec succès');
+    })
+    .catch(error => {
+        console.error('Erreur lors de la création du rendez-vous:', error);
+        alert('Erreur lors de la création du rendez-vous');
+    });
 }
