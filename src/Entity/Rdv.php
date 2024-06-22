@@ -26,11 +26,17 @@ class Rdv
     #[ORM\Column(type: Types::FLOAT, nullable: true)]
     private ?float $rdvCoordinatesY = null;
 
-    #[ORM\Column]
-    private ?int $rdvClientId = null;
+    #[ORM\ManyToOne(targetEntity: Cut::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Cut $rdvCut = null;
 
-    #[ORM\Column]
-    private ?int $rdvCutterId = null;
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $rdvUser = null;
+
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $rdvCutter = null;
 
     public function getId(): ?int
     {
@@ -85,26 +91,38 @@ class Rdv
         return $this;
     }
 
-    public function getRdvClientId(): ?int
+    public function getRdvCut(): ?Cut
     {
-        return $this->rdvClientId;
+        return $this->rdvCut;
     }
 
-    public function setRdvClientId(?int $rdvClientId): static
+    public function setRdvCut(?Cut $rdvCut): static
     {
-        $this->rdvClientId = $rdvClientId;
+        $this->rdvCut = $rdvCut;
 
         return $this;
     }
 
-    public function getRdvCutterId(): ?int
+    public function getRdvUserId(): ?User
     {
-        return $this->rdvCutterId;
+        return $this->rdvUser;
     }
 
-    public function setRdvCutterId(?int $rdvCutterId): static
+    public function setRdvUserId(?User $rdvUserId): static
     {
-        $this->rdvCutterId = $rdvCutterId;
+        $this->rdvUser = $rdvUserId;
+
+        return $this;
+    }
+
+    public function getRdvCutterId(): ?User
+    {
+        return $this->rdvCutter;
+    }
+
+    public function setRdvCutterId(?User $rdvCutterId): static
+    {
+        $this->rdvCutter = $rdvCutterId;
 
         return $this;
     }
