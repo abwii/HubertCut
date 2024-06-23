@@ -38,6 +38,9 @@ class Rdv
     #[ORM\JoinColumn(nullable: false)]
     private ?User $rdvCutter = null;
 
+    #[ORM\Column(type: Types::FLOAT, nullable: true)]
+    private ?float $rdvPrice = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,26 +106,38 @@ class Rdv
         return $this;
     }
 
-    public function getRdvUserId(): ?User
+    public function getRdvUser(): ?User
     {
         return $this->rdvUser;
     }
 
-    public function setRdvUserId(?User $rdvUserId): static
+    public function setRdvUser(?User $rdvUser): static
     {
-        $this->rdvUser = $rdvUserId;
+        $this->rdvUser = $rdvUser;
 
         return $this;
     }
 
-    public function getRdvCutterId(): ?User
+    public function getRdvCutter(): ?User
     {
         return $this->rdvCutter;
     }
 
-    public function setRdvCutterId(?User $rdvCutterId): static
+    public function setRdvCutter(?User $rdvCutter): static
     {
-        $this->rdvCutter = $rdvCutterId;
+        $this->rdvCutter = $rdvCutter;
+
+        return $this;
+    }
+
+    public function getRdvPrice(): ?float
+    {
+        return $this->rdvPrice;
+    }
+
+    public function setRdvPrice(?float $rdvPrice): static
+    {
+        $this->rdvPrice = $rdvPrice;
 
         return $this;
     }
