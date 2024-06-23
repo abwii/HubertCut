@@ -61,6 +61,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $rdvComment = null;
+
     public function __construct()
     {
         $this->cutterCuts = new ArrayCollection();
@@ -223,6 +226,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUserCoordinatesY(?float $userCoordinatesY): static
     {
         $this->userCoordinatesY = $userCoordinatesY;
+
+        return $this;
+    }
+
+    public function getRdvComment(): ?string
+    {
+        return $this->rdvComment;
+    }
+
+    public function setRdvComment(?string $rdvComment): static
+    {
+        $this->rdvComment = $rdvComment;
 
         return $this;
     }
