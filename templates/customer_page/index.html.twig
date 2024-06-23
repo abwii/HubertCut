@@ -61,7 +61,9 @@
     <script>
         var userCoordinatesX = {{ userCoordinatesX|json_encode }};
         var userCoordinatesY = {{ userCoordinatesY|json_encode }};
+        var lfcCutters = {{ lfcCutters|json_encode }};
         console.log('User Coordinates:', userCoordinatesX, userCoordinatesY);
+        console.log('LFC Cutters:', lfcCutters);
     </script>
 
     <script src="{{ asset('js/customerScript.js') }}"></script>
