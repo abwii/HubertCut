@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Form\RdvFormType;
 use App\Repository\CutRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,10 +25,13 @@ class CustomerPageController extends AbstractController
 
         $rdvForm = $this->createForm(RdvFormType::class, null, ['cut_choices' => $cutChoices]);
 
+        $lfcCutters = $entityManager->getRepository(User::class)->findBy(['cutterStatus' => 'LFC']);
+
         return $this->render('customer_page/index.html.twig', [
             'RdvForm' => $rdvForm->createView(),
             'userCoordinatesX' => $user->getUserCoordinatesX(),
             'userCoordinatesY' => $user->getUserCoordinatesY(),
+            'lfcCutters' => $lfcCutters,
         ]);
     }
 }

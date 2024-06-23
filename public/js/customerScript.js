@@ -5,7 +5,7 @@ console.log('Hello customerScript.js');
 var map;
 
 // Fonction pour initialiser la carte avec une position par défaut
-function initializeMap(latitude = 49.43693086050762, longitude = 1.102400429307783) {
+function initializeMap(latitude = 48.858293758064654, longitude = 2.2945957013375224) {
     // Si la carte existe déjà, la réinitialiser
     if (map) {
         map.setView([latitude, longitude], 16);
@@ -18,17 +18,35 @@ function initializeMap(latitude = 49.43693086050762, longitude = 1.1024004293077
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    L.marker([49.43693086050762, 1.102400429307783]).addTo(map)
-        .bindPopup('Marine <br>⭐⭐⭐⭐⭐ (321 Prestations)<br><button type="button" class="btn btn-primary" onclick="createRdv(1, 1, \'a_domicile\')">Réserver une séance (16,95€)</button>');
-
-    L.marker([49.43693086053762, 1.132400229307783]).addTo(map)
-        .bindPopup('Camille <br>⭐⭐⭐ (36 Prestations)<br><button type="button" class="btn btn-primary" onclick="createRdv(2, 1, \'sur_place\')">Réserver une séance (12,95€)</button>');
+    lfcCutters.forEach(cutter => {
+        L.marker(48.858293758064654, 2.2945957013375224).addTo(map)
+            .bindPopup(`Prestations)<br><button type="button" class="btn btn-primary" onclick="createRdv(${cutter.id}, 1, 'a_domicile')">Réserver une séance</button>`);
+    });
 
     setTimeout(function(){ map.invalidateSize(true); }, 100);
 }
 
 // Demande la position de l'utilisateur et initialise la carte
-function requestUserLocation() {
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            console.log('User position:', position.coords);
+            initializeMap(position.coords.latitude, position.coords.longitude);
+        },
+        function(error) {
+            console.error("Erreur lors de l'obtention de la position de l'utilisateur:", error);
+            // Utiliser la position par défaut en cas d'erreur
+            initializeMap();
+        }
+    );
+} else {
+    // Le navigateur ne supporte pas la géolocalisation
+    console.warn("La géolocalisation n'est pas supportée par ce navigateur.");
+    initializeMap();
+}
+
+function updatemap() {
+    console.log('Updating map with form data...');
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             function(position) {
@@ -46,14 +64,6 @@ function requestUserLocation() {
         console.warn("La géolocalisation n'est pas supportée par ce navigateur.");
         initializeMap();
     }
-}
-
-// Initialiser la carte avec la position de l'utilisateur au chargement de la page
-requestUserLocation();
-
-function updatemap() {
-    console.log('Updating map with form data...');
-    requestUserLocation();
 }
 
 function createRdv(cutterId, cutId, locationType) {
