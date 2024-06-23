@@ -214,3 +214,7 @@ footer {
 .min-vh-100 {
     min-height: 100vh;
 }
+
+#registration_form_agreeTerms {
+    margin-left: 5px;
+}
