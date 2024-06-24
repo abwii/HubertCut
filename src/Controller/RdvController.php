@@ -21,7 +21,6 @@ class RdvController extends AbstractController
         $cutId = $request->request->get('cut_id');
         $locationType = $request->request->get('location_type');
 
-        // Récupérer le cutter et la coupe depuis la base de données
         $cutter = $entityManager->getRepository(User::class)->find($cutterId);
         $cut = $entityManager->getRepository(Cut::class)->find($cutId);
 

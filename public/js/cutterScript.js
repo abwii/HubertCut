@@ -39,7 +39,7 @@ function updateCutterStatus(callback) {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             console.log('Cutter status updated');
-            var newStatus = xhr.responseText.split(' ').pop(); // Extracts the new status from the response
+            var newStatus = xhr.responseText.split(' ').pop();
             callback(newStatus);
         }
     };
